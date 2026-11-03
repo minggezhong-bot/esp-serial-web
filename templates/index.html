@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Switch / USB playground</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <link rel="preload" as="image" href="{{ url_for('static', filename='man-03.gif') }}">
+  <script src="{{ url_for('static', filename='app.js') }}" defer></script>
+</head>
+<body>
+  <header>
+    <span class="header-note">PHYSICAL INPUT. DIGITAL RESPONSE.</span>
+    <span class="local"><i></i> USB PLAYGROUND</span>
+  </header>
+  <main>
+    <section class="playground" aria-label="Live switch visualization">
+      <div class="stage-top"><span>LIVE INPUT</span><span id="stage-status">AWAITING CONNECTION</span></div>
+      <div class="visual">
+        <img id="switch-animation" class="switch-animation"
+             src="{{ url_for('static', filename='man-01.gif') }}"
+             data-released-src="{{ url_for('static', filename='man-01.gif') }}"
+             data-pressed-src="{{ url_for('static', filename='man-03.gif') }}"
+             width="480" height="582" alt="Character animation — switch released">
+      </div>
+      <div class="stage-caption" role="status" aria-live="polite">
+        <p id="switch-label">Ready when you are.</p>
+        <span id="switch-hint">Click Connect to choose your ESP32.</span>
+      </div>
+      <div class="stage-bottom"><span>D0 <span class="line"></span> 3V3</span><span id="signal">SIGNAL —</span></div>
+    </section>
+
+    <section class="connection" aria-label="Device connection">
+      <div class="connection-heading"><span class="indicator" id="indicator"></span><div><h2 id="connection-title">Connect your device</h2><p id="connection-detail">USB serial · 115200 baud</p></div></div>
+      <div class="controls">
+        <button class="connect" id="connect" type="button" disabled>Connect <span>↗</span></button>
+      </div>
+      <p class="error" id="error" role="alert" hidden></p>
+    </section>
+    <div class="instructions"><span><b>01</b> Plug in with USB</span><span><b>02</b> Click Connect and choose your ESP32</span><span><b>03</b> Hold the physical switch</span></div>
+  </main>
+</body>
+</html>
